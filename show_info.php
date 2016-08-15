@@ -11,11 +11,29 @@ if (isset($_SESSION['name']))
 <html>
 <head>
   <title>Shows - <?php echo $_SESSION['name']; ?></title>
-  <link rel = "stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel = "stylesheet" href = "css/bootstrap.css">
   <link rel = "stylesheet" href = "css/profile.css">
 </head>
 <body>
   <div class = "content">
+    <nav class="navbar navbar-default custom">
+      <div class="navbar-header">
+        <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+      </div>
+      <div class="navbar-collapse collapse navbar-right">
+        <ul class="nav navbar-nav">
+          <li><a href="profile.php">Home</a></li>
+          <li><a href="tv_shows.php">TV Shows</a></li>
+          <li class = "active"><a href="options.php">Options</a></li>
+          <li><a href="logout.php">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
     <div align = "center">
       <?php
 
@@ -78,6 +96,8 @@ if (isset($_SESSION['name']))
     Created by Christopher Aranadi (c) 2016
   </footer>
 </body>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </html>
 
 <?php

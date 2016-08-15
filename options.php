@@ -9,7 +9,7 @@ if (isset($_SESSION['name']))
 <html>
 <head>
   <title>Profile - <?php echo $_SESSION['name']; ?></title>
-  <link rel = "stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel = "stylesheet" href = "css/bootstrap.css">
   <link rel = "stylesheet" href = "css/profile.css">
 </head>
 <body>
