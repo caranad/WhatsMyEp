@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 17, 2016 at 01:42 AM
+-- Generation Time: Aug 17, 2016 at 01:56 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -42,6 +42,15 @@ INSERT INTO `episodes` (`show_id`, `episode_number`, `episode_name`) VALUES
 (1, 3, 'Episode Three'),
 (1, 4, 'Episode Four'),
 (1, 5, 'Episode Five'),
+(2, 1, 'Episode One, 02'),
+(2, 2, 'Episode Two, 02'),
+(2, 3, 'Episode Three, 02'),
+(5, 1, 'Indian Picnics Are Mental'),
+(5, 2, 'Insanity At The Mela'),
+(5, 3, 'Desi Parents And School'),
+(5, 4, 'Desi Parents And Technology'),
+(5, 5, 'Desi Parents And Halloween'),
+(5, 6, 'Punjabi Television Breakdown'),
 (1, 6, 'Episode 6'),
 (1, 7, 'Episode 7'),
 (1, 8, 'Episode 8'),
@@ -91,9 +100,6 @@ INSERT INTO `episodes` (`show_id`, `episode_number`, `episode_name`) VALUES
 (1, 52, 'Episode 52'),
 (1, 53, 'Episode 53'),
 (1, 54, 'Episode 54'),
-(2, 1, 'Episode One, 02'),
-(2, 2, 'Episode Two, 02'),
-(2, 3, 'Episode Three, 02'),
 (2, 4, 'Episode 4, 02'),
 (2, 5, 'Episode 5, 02'),
 (2, 6, 'Episode 6, 02'),
@@ -141,14 +147,14 @@ INSERT INTO `episodes` (`show_id`, `episode_number`, `episode_name`) VALUES
 (2, 48, 'Episode 48, 02'),
 (2, 49, 'Episode 49, 02'),
 (2, 50, 'Episode 50, 02'),
-(5, 1, 'Indian Picnics Are Mental'),
-(5, 2, 'Insanity At The Mela'),
-(5, 3, 'Desi Parents And School'),
-(5, 4, 'Desi Parents And Technology'),
-(5, 5, 'Desi Parents And Halloween'),
-(5, 6, 'Punjabi Television Breakdown');
-
-
+(5, 7, 'Desi Parents And Birthdays'),
+(5, 8, 'Desi Parents Are Crazy'),
+(5, 9, 'Desi Parents Are Crazy 2'),
+(5, 10, 'How To Avoid Arranged Marriages'),
+(5, 11, 'Desi Parents Are Relationships'),
+(5, 12, 'AAA Tugboat and Immigration Service'),
+(5, 13, 'A1 Shopping Cart School'),
+(5, 14, 'The Indian Restaurant Breakdown');
 
 -- --------------------------------------------------------
 
@@ -186,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `name` varchar(256) DEFAULT NULL,
   `username` varchar(256) DEFAULT NULL,
   `password` varchar(256) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -196,7 +202,8 @@ INSERT INTO `users` (`id`, `name`, `username`, `password`) VALUES
 (1, 'Christopher Aranadi', 'christo1996', 'billjames123'),
 (2, 'Ross Lingham', 'rlingham69', 'reallister'),
 (3, 'Bikram Saini', 'Bikram1965', 'jusreign1990'),
-(4, 'Jasmeet Singh', 'jusreign', 'beatsbydre');
+(4, 'Jasmeet Singh', 'jusreign', 'beatsbydre'),
+(5, 'John Doe', 'original_john_doe', 'jdoe_marian');
 
 -- --------------------------------------------------------
 
@@ -208,6 +215,13 @@ CREATE TABLE IF NOT EXISTS `user_shows` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `show_id` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_shows`
+--
+
+INSERT INTO `user_shows` (`user_id`, `show_id`) VALUES
+(5, 5);
 
 -- --------------------------------------------------------
 
@@ -221,6 +235,26 @@ CREATE TABLE IF NOT EXISTS `user_show_episodes` (
   `episode_id` int(11) NOT NULL,
   `watched` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_show_episodes`
+--
+
+INSERT INTO `user_show_episodes` (`user_id`, `show_id`, `episode_id`, `watched`) VALUES
+(5, 5, 1, 0),
+(5, 5, 2, 0),
+(5, 5, 3, 0),
+(5, 5, 4, 0),
+(5, 5, 5, 0),
+(5, 5, 6, 0),
+(5, 5, 7, 0),
+(5, 5, 8, 0),
+(5, 5, 9, 0),
+(5, 5, 10, 0),
+(5, 5, 11, 0),
+(5, 5, 12, 0),
+(5, 5, 13, 0),
+(5, 5, 14, 0);
 
 --
 -- Indexes for dumped tables
@@ -257,7 +291,7 @@ ALTER TABLE `shows`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
