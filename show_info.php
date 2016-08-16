@@ -51,8 +51,10 @@ if (isset($_SESSION['name']))
         echo "<h3>Genre: " . $row['genre'] . "</h3>";
       }
 
-      $query = $db->prepare("select * from episodes where show_id = :id");
-      $query->bindParam(":id", $id);
+      $query = $db->prepare("select * from user_show_episodes left join episodes on user_show_episodes.episode_id = episodes.episode_number
+                             and user_show_episodes.show_id = episodes.show_id where user_id = :id and episodes.show_id = :sid");
+      $query->bindParam(":id", $_SESSION['id']);
+      $query->bindParam(":sid", $id);
       $query->execute();
 
       echo "<div class = 'table'>";
@@ -60,25 +62,25 @@ if (isset($_SESSION['name']))
       {
         $ep_num = $row['episode_number'];
         $ep_name = $row['episode_name'];
-        $ep_date = $row['date_watched'];
+        $status = $row['watched'];
 
         echo "<div class = 'row'>";
-        echo " <div class = 'column'>";
-        echo "$ep_num";
+        echo "  <div class = 'column'>";
+        echo "    $ep_num";
         echo "  </div>";
-        echo " <div class = 'column'>";
-        echo "$ep_name";
+        echo "  <div class = 'column'>";
+        echo "    $ep_name";
         echo "  </div>";
+        echo "  <div class = 'column'>";
 
-        echo " <div class = 'column'>";
-        if ($ep_date == "")
+        if ($status == false)
         {
-          echo "<div>Episode not watched</div>";
-          echo "<div><a href = '#'>Mark down episode as watched</a></div>";
+          echo "<div>Episode not watched.</div>";
+          echo "<a href = 'watched.php?show=$id&ep=$ep_num'>Mark as watched</a>";
         }
         else
         {
-          echo "$ep_date";
+          echo "You have already watched this episode.";
         }
         echo "  </div>";
         echo "</div>";

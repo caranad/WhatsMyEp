@@ -17,6 +17,7 @@ if (!isset($_SESSION['name']))
       <form action = "login.php" method = "post" class = "centered">
         <h1><b>Login To WhatsMyEp</b></h1>
         <?php if (isset($_SESSION['tries'])) { echo "Invalid username or password."; } ?>
+        <?php if (isset($_SESSION['created'])) { echo $_SESSION['created']; } ?>
         <div class = "row">
           <label for = "user">Username</label>
           <input type = "text" name = "user" class = "form-control input" value = ""/>
@@ -27,6 +28,7 @@ if (!isset($_SESSION['name']))
         </div>
         <div class = "row">
           <button type = "submit" class = "btn btn-success">Login</button>
+          <button class = "btn btn-primary"><a href = "signup.php">Register</a></button>
         </div>
       </form>
     </div>

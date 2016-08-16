@@ -4,6 +4,10 @@ session_start();
 
 include "db_server.php";
 
+unset($_SESSION['user_name']);
+unset($_SESSION['user_username']);
+unset($_SESSION['user_password']);
+
 $new_name = $_POST['name'];
 $new_username = $_POST['username'];
 $new_password = $_POST['password'];
@@ -14,7 +18,7 @@ if ($new_name != "")
   $query->bindParam(":n", $new_name);
   $query->bindParam(":i", $_SESSION['id']);
   $query->execute();
-  echo "User changed successfully <br>";
+  $_SESSION['user_name'] = "Name information edited successfully.";
   $_SESSION['name'] = $new_name;
 }
 if ($new_username != "")
@@ -23,7 +27,7 @@ if ($new_username != "")
   $query->bindParam(":n", $new_username);
   $query->bindParam(":i", $_SESSION['id']);
   $query->execute();
-  echo "Username changed successfully <br>";
+  $_SESSION['user_username'] = "Username information edited successfully.";
   $_SESSION['username'] = $new_username;
 }
 if ($new_password != "")
@@ -32,10 +36,10 @@ if ($new_password != "")
   $query->bindParam(":n", $new_password);
   $query->bindParam(":i", $_SESSION['id']);
   $query->execute();
-  echo "Password changed successfully <br>";
+  $_SESSION['user_password'] = "Password information edited successfully.";
   $_SESSION['username'] = $new_username;
 }
 
-echo "<a href = 'options.php'>Go Back</a>";
+header("Location: options.php");
 
 ?>

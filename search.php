@@ -10,7 +10,7 @@ if (isset($_SESSION['name']))
 
 <html>
 <head>
-  <title>Shows - <?php echo $_SESSION['name']; ?></title>
+  <title>Search results - <?php echo $_GET['search']; ?></title>
   <link rel = "stylesheet" href = "css/bootstrap.css">
   <link rel = "stylesheet" href = "css/profile.css">
 </head>
@@ -34,46 +34,58 @@ if (isset($_SESSION['name']))
       </div>
     </nav>
 
-    <h1><?php echo $_SESSION['name']; ?>'s favorite TV shows</h1>
-    <h3><?php if (isset($_SESSION['deleted'])) { echo $_SESSION['deleted']; } ?>
+    <h1>Search results for: <?php echo $_GET['search']; ?></h1>
 
     <div class = "table">
       <?php
 
-      $id = $_SESSION['id'];
-      $num_items = 0;
+      $search_term = $_GET['search'];
+      $term = "%$search_term%";
 
-      $query = $db->prepare("select * from user_shows left join shows on user_shows.show_id = shows.id where user_id = :v");
-      $query->bindParam(":v", $id);
+      $query = $db->prepare("select * from shows where name like :term");
+      $query->bindParam(":term", $term);
       $query->execute();
 
+      echo "<div class = 'table'>";
       while ($row = $query->fetch(PDO::FETCH_ASSOC))
       {
-        $show_id = $row['id'];
+        $id = $row['id'];
+        $name = $row['name'];
+        $airdate = $row['airdate'];
+        $genre = $row['genre'];
+
         echo "<div class = 'row'>";
         echo "  <div class = 'column'>";
-        echo "  <a href = 'show_info.php?id=$show_id'>";
-        echo "    <h3>" . $row['name'] . "</h3>";
-        echo "  </a>";
+        echo "    $name";
         echo "  </div>";
         echo "  <div class = 'column'>";
-        echo $row['airdate'];
+        echo "    $airdate";
         echo "  </div>";
         echo "  <div class = 'column'>";
-        echo $row['genre'];
+        echo "    $genre";
         echo "  </div>";
-        echo "<div class = 'column'>";
-        echo "<a href = 'delete.php?id=$show_id'>Unlike show</a>";
-        echo "</div>";
-        echo "</div>";
 
-        $num_items++;
-      }
+        $check = $db->prepare("select count(*) from user_shows where show_id = :id and user_id = :uid");
+        $check->bindParam(":id", $id);
+        $check->bindParam(":uid", $_SESSION['id']);
+        $check->execute();
 
-      if ($num_items == 0)
-      {
-        echo "<h3>You have no liked TV shows. Start searching!</h3>";
+        $row = $check->fetch(PDO::FETCH_ASSOC);
+
+        echo "  <div class = 'column'>";
+
+        if ($row['count(*)'] == 1)
+        {
+          echo "Cannot add to favorites. Already exists.";
+        }
+        else
+        {
+          echo "<a href = 'add.php?id=$id'>Add to favorites</a>";
+        }
+        echo "  </div>";
+        echo "</div>";
       }
+      echo "</div>";
 
       ?>
     </div>
@@ -89,7 +101,6 @@ if (isset($_SESSION['name']))
 </html>
 
 <?php
-  unset($_SESSION['deleted']);
 }
 else
 {

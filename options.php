@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 if (isset($_SESSION['name']))
 {
 
@@ -35,6 +36,10 @@ if (isset($_SESSION['name']))
     <h1>Personal Options</h1>
 
     <div align = "center">
+      <?php if (isset($_SESSION['user_name'])) { echo $_SESSION['user_name'] . "<br>"; } ?>
+      <?php if (isset($_SESSION['user_username'])) { echo $_SESSION['user_username'] . "<br>"; } ?>
+      <?php if (isset($_SESSION['user_password'])) { echo $_SESSION['user_password'] . "<br>"; } ?>
+
       <form action = "change_user.php" method = "post">
         <div class = "row-item">
           <label for = "name">Name</label>
@@ -49,7 +54,6 @@ if (isset($_SESSION['name']))
           <input type = "text" name = "password" class = "form-control">
         </div>
 
-        <!-- Future: Add select-options bar for shows the user wants to add -->
         <button class = "btn btn-info">Update Information</button>
       </form>
     </div>
@@ -64,6 +68,9 @@ if (isset($_SESSION['name']))
 </html>
 
 <?php
+  unset($_SESSION['user_name']);
+  unset($_SESSION['user_username']);
+  unset($_SESSION['user_password']);
 }
 else
 {

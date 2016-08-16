@@ -33,6 +33,17 @@ if (isset($_SESSION['name']))
     </nav>
 
     <h1>Welcome, <?php echo $_SESSION['name']; ?></h1>
+    <h3><?php if (isset($_SESSION['added'])) { echo $_SESSION['added']; } ?>
+
+    <div class = "col-md-12">
+      <form action = "search.php" method = "get">
+        <div class = "search">
+          <label for = "search">Search for TV shows</label>
+          <input type = "text" name = "search" class = "form-control" value = "">
+        </div>
+        <button type = "submit" class = "btn btn-primary">Search</button>
+      </form>
+    </div>
   </div>
 
   <footer class = "main-footer">
@@ -44,6 +55,7 @@ if (isset($_SESSION['name']))
 </html>
 
 <?php
+  unset($_SESSION['added']);
 }
 else
 {
