@@ -216,12 +216,6 @@ CREATE TABLE IF NOT EXISTS `user_shows` (
   `show_id` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `user_shows`
---
-
-INSERT INTO `user_shows` (`user_id`, `show_id`) VALUES
-(5, 5);
 
 -- --------------------------------------------------------
 
@@ -236,25 +230,6 @@ CREATE TABLE IF NOT EXISTS `user_show_episodes` (
   `watched` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `user_show_episodes`
---
-
-INSERT INTO `user_show_episodes` (`user_id`, `show_id`, `episode_id`, `watched`) VALUES
-(5, 5, 1, 0),
-(5, 5, 2, 0),
-(5, 5, 3, 0),
-(5, 5, 4, 0),
-(5, 5, 5, 0),
-(5, 5, 6, 0),
-(5, 5, 7, 0),
-(5, 5, 8, 0),
-(5, 5, 9, 0),
-(5, 5, 10, 0),
-(5, 5, 11, 0),
-(5, 5, 12, 0),
-(5, 5, 13, 0),
-(5, 5, 14, 0);
 
 --
 -- Indexes for dumped tables
